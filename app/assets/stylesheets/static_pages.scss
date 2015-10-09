@@ -2,7 +2,62 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html, body, #content{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .map{
-  width: 500px;
-  height: 500px;
+  width: 40%;
+  height: 100%;
+  float: right;
+}
+
+.searchContainer{
+  width: 100%;
+  height: 100%;
+}
+
+.index{
+  width: 60%;
+  height: 100%;
+  float: left;
+  background-color: #eee;
+  overflow-y: scroll;
+}
+
+.innerIndex{
+  padding: 0 15px;
+  padding-top: 15px;
+}
+
+.tree-item{
+  width: 45%;
+  height: 200px;
+  border: 1px solid black;
+  box-sizing: padding-box;
+  padding: 2%;
+  margin-bottom: 20px;
+}
+
+.tree-item:nth-child(even){
+  float: left;
+}
+
+.tree-item:nth-child(odd){
+  float: right;
+}
+
+
+
+// .tree-item:last-child{
+//   margin-right: 5%;
+// }
+
+.group:after{
+  content: "";
+  display: block;
+  clear: both;
 }

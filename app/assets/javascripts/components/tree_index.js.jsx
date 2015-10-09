@@ -28,11 +28,13 @@
 
     render: function(){
       return (
-        <div>{
+        <div className="index">
+          <div className="innerIndex">{
             this.state.trees.map(function(tree){
               return <Components.TreeIndexItem tree={tree} key={tree.id} onHover={this.props.onHover} />;
             }.bind(this))
-        }</div>
+          }</div>
+      </div>
       );
     }
   });

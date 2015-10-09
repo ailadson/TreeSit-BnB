@@ -14,7 +14,7 @@
 
     render: function(){
       return(
-        <div>
+        <div className="searchContainer group">
           <Components.Index onHover={this.changeHoverTree}/>
           <Components.Map hightlightedLocation={this.state.hoveredTreeLocation}/>
         </div>
