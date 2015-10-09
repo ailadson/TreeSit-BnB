@@ -1,10 +1,10 @@
 /* global React */
-/* global Index */
+/* global Components */
 
 $(function(){
 
   React.render(
-    <Index/>,
+    <Components.Search/>,
     document.getElementById("content")
   );
 

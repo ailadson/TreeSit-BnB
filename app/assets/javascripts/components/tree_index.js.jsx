@@ -6,14 +6,15 @@
 (function() {
   'use strict';
 
-  window.Index = React.createClass({
+  window.Components = window.Components || {};
+
+  window.Components.Index = React.createClass({
     getInitialState: function(){
       return { trees: TreeStore.all() };
     },
 
     componentDidMount: function(){
       TreeStore.addChangeListener(this._changeTrees);
-      TreeActions.fetch();
     },
 
     componentWillUnmount: function(){
