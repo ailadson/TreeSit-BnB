@@ -1,6 +1,7 @@
 /* global React */
 /* global TreeStore */
 /* global TreeActions */
+/* global TreeIndexItem */
 
 
 (function() {
@@ -27,9 +28,11 @@
 
     render: function(){
       return (
-        <div>
-          {this.state.trees}
-        </div>
+        <div>{
+            this.state.trees.map(function(tree){
+              return <Components.TreeIndexItem tree={tree} key={tree.id} onHover={this.props.onHover} />;
+            }.bind(this))
+        }</div>
       );
     }
   });

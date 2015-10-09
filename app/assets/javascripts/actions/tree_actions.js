@@ -11,11 +11,11 @@ var TreeActions = {
     });
   },
 
-  fetch: function(){
+  fetch: function(bounds){
     AppDispatcher.dispatch({
       actionType: TreeConstants.FETCHING
     });
 
-    ApiUtil.fetchTrees();
+    ApiUtil.fetchTrees(bounds);
   }
 };

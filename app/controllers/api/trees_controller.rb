@@ -1,6 +1,6 @@
 class Api::TreesController < ApplicationController
   def index
-    @trees = Tree.all
+    @trees = Tree.inBounds(params[:bounds])
     render json: @trees
   end
 

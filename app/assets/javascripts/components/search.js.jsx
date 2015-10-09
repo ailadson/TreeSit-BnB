@@ -4,11 +4,19 @@
   window.Components = window.Components || {};
 
   window.Components.Search = React.createClass({
+    getInitialState: function(){
+      return{ hoveredTreeLocation: null };
+    },
+
+    changeHoverTree: function(pos){
+      this.setState({ hoveredTreeLocation: pos });
+    },
+
     render: function(){
       return(
         <div>
-          <Components.Index />
-          <Components.Map />
+          <Components.Index onHover={this.changeHoverTree}/>
+          <Components.Map hightlightedLocation={this.state.hoveredTreeLocation}/>
         </div>
       );
     }

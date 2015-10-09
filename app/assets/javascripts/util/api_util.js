@@ -1,8 +1,8 @@
 /* global TreeActions */
 
 var ApiUtil = {
-  fetchTrees: function(){
-    $.getJSON('api/trees', function(trees){
+  fetchTrees: function(bounds){
+    $.getJSON('api/trees', { bounds: bounds }, function(trees){
       TreeActions.reset(trees);
     });
   }
