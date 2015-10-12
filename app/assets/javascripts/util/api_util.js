@@ -5,5 +5,11 @@ var ApiUtil = {
     $.getJSON('api/trees', { bounds: bounds }, function(trees){
       TreeActions.reset(trees);
     });
+  },
+
+  createTree: function(data){
+    $.post('api/trees', {tree: data}, function(tree){
+      TreeActions.add(tree);
+    });
   }
 };

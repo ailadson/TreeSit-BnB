@@ -1,7 +1,8 @@
 /* global React */
+/* global ReactRouter */
 /* global google */
 /* global TreeStore */
-/* global TreeActions */
+/* global FilterActions */
 
 (function() {
   'use strict';
@@ -10,6 +11,8 @@
 
   window.Components.Map = React.createClass({
     markers: [],
+
+    mixins: [ReactRouter.History],
 
     componentDidMount: function(){
       var map = React.findDOMNode(this.refs.map);
@@ -24,11 +27,15 @@
         var nE = bounds.getNorthEast();
         var sW = bounds.getSouthWest();
 
-        TreeActions.fetch({
-          northEast: [nE.J, nE.M],
-          southWest: [sW.J, sW.M]
-        });
+        FilterActions.setBounds([[nE.J, nE.M], [sW.J, sW.M]]);
 
+      }.bind(this));
+
+      this.map.addListener("click", function(e){
+        console.log(e);
+        var latLng = e.latLng;
+        var url = 'trees/new';
+        this.history.pushState(null, url, { lat: latLng.J, lng:latLng.M });
       }.bind(this));
 
       TreeStore.addChangeListener(this._updateMarkers);
@@ -39,6 +46,8 @@
     },
 
     _findMarkerByPosition: function(pos){
+      if(!pos){ return; }
+
       return this.markers.find(function(marker){
         return (parseFloat(marker.position.J.toFixed(6)) === pos.lat &&
                 parseFloat(marker.position.M.toFixed(6)) === pos.lng);
@@ -48,21 +57,24 @@
     _updateMarkers: function(){
       var trees = TreeStore.all();
       var newMarks = [];
+      var filter = FilterParamStore.getFilter();
 
       //add new marks
       trees.forEach(function(tree){
         var oldMark = this._findMarkerByPosition(tree);
 
-        if(oldMark){
-          newMarks.push(oldMark);
-        } else {
-          var marker = new google.maps.Marker({
-            position: {lat: tree.lat, lng: tree.lng},
-            map: this.map
-          });
-
-          newMarks.push(marker);
+        if(tree.seating <= filter.maxSeating && tree.seating >= filter.minSeating){
+          if(oldMark){
+            newMarks.push(oldMark);
+          } else {
+            var marker = new google.maps.Marker({
+              position: {lat: tree.lat, lng: tree.lng},
+              map: this.map
+            });
+            newMarks.push(marker);
+          }
         }
+
       }.bind(this));
 
       //remove old marks

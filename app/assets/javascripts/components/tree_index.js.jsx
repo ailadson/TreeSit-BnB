@@ -23,7 +23,12 @@
     },
 
     _changeTrees: function(){
-      this.setState({ trees: TreeStore.all() });
+      var filter = FilterParamStore.getFilter();
+      var filteredTrees = TreeStore.all().filter(function(tree){
+        return (tree.seating <= filter.maxSeating && tree.seating >= filter.minSeating);
+      });
+
+      this.setState({ trees: filteredTrees });
     },
 
     render: function(){

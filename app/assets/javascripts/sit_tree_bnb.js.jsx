@@ -23,6 +23,7 @@ $(function(){
   var routes = (
     <Route path="/" component={App}>
       <IndexRoute component={Components.Search} />
+      <Route path="trees/new" component={Components.TreeForm}/>
     </Route>
   );
 

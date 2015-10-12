@@ -7,5 +7,8 @@ locs = [
 ]
 
 5.times do |i|
-  Tree.create!(lat: locs[i][0], lng: locs[i][1], description: Faker::Lorem.sentences(3).join(" "))
+  Tree.create!(lat: locs[i][0],
+               lng: locs[i][1],
+               description: Faker::Lorem.sentences(3).join(" "),
+               seating: i)
 end

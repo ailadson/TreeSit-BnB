@@ -12,10 +12,25 @@ var TreeActions = {
   },
 
   fetch: function(bounds){
-    AppDispatcher.dispatch({
-      actionType: TreeConstants.FETCHING
-    });
+    // AppDispatcher.dispatch({
+    //   actionType: TreeConstants.FETCHING
+    // });
 
     ApiUtil.fetchTrees(bounds);
+  },
+
+  add: function(tree){
+    AppDispatcher.dispatch({
+      actionType: TreeConstants.ADD,
+      payload: tree
+    });
+  },
+
+  create: function(data){
+    AppDispatcher.dispatch({
+      actionType: TreeConstants.CREATING
+    });
+
+    ApiUtil.createTree(data);
   }
 };
